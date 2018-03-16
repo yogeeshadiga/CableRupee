@@ -1,0 +1,17 @@
+
+<ion-content padding>
+  <div text-center>
+    <img src="assets/imgs/key.png" width="100">
+    <ion-icon name="ios-key-outline">key</ion-icon>
+  </div>
+  <ion-list no-lines padding-top>
+    <ion-item >
+      <ion-input type="number" pattern="[0-9]*" placeholder="Enter Key" text-center></ion-input>
+    </ion-item>
+  </ion-list>
+  <button ion-button block round color="secondary" (click)="collectPage();">Go</button>
+
+  <div padding-top>
+    <button ion-button block color="light" clear (click)="signupPage();">If new member ? SIGNUP</button>
+  </div>
+</ion-content>
