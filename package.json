@@ -44,6 +44,10 @@
     "typescript": "~2.6.2"
   },
   "description": "Cable Rupee App",
+  "config": {
+    "ionic_copy": "./config/copy.config.js",
+    "ionic_sass": "./config/sass.config.js"
+  },
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},

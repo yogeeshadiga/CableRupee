@@ -3,7 +3,7 @@
     <ion-toolbar>
         <ion-item no-lines>
             <ion-avatar item-left>
-              <h2>C</h2>
+              <h2>CR</h2>
             </ion-avatar>
             <h2>Hello,</h2>
             <p>Guest User</p>
@@ -19,7 +19,7 @@
   <ion-content>
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          <i class="fa rupee"></i> <ion-icon name="{{p.icon}}"></ion-icon> {{p.title}}
+        <fa-icon name="{{p.icon}}" size="1x"></fa-icon> {{p.title}}
       </button>
     </ion-list>
   </ion-content>

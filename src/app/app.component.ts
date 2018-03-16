@@ -22,8 +22,8 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Collect Payment', icon:'money', component: CollectPage },
-      { title: 'Sync', icon:'swap', component: SyncPage }
+      { title: 'Collect Payment', icon:'rupee', component: CollectPage },
+      { title: 'Sync', icon:'refresh', component: SyncPage }
     ];
 
   }
