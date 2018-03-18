@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from "@angular/http";
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -9,6 +10,11 @@ import { LoginPage } from '../pages/login/login';
 import { CollectPage } from '../pages/collect/collect';
 import { SyncPage } from '../pages/sync/sync';
 
+import { IonicStorageModule } from'@ionic/storage';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { SQLitePorter } from '@ionic-native/sqlite-porter';
+
+import { DatabaseProvider } from '../providers/database/database';
 import {FaIconComponent} from "../components/fa-icon/fa-icon.component";
 
 @NgModule({
@@ -21,6 +27,8 @@ import {FaIconComponent} from "../components/fa-icon/fa-icon.component";
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -33,7 +41,10 @@ import {FaIconComponent} from "../components/fa-icon/fa-icon.component";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    SQLite,
+    SQLitePorter,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DatabaseProvider
   ]
 })
 export class AppModule {}

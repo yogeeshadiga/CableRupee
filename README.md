@@ -13,7 +13,15 @@ git push -u origin master
 
 ```commands used
 ionic g page login
-ionic cordova resources
+ionic cordova resources //to generate logo and spash screen
+
+Install the Cordova and Ionic Native plugins:
+$ ionic cordova plugin add cordova-sqlite-storage
+$ npm install --save @ionic-native/sqlite
+
+Install the Cordova and Ionic Native plugins:
+$ ionic cordova plugin add uk.co.workingedge.cordova.plugin.sqliteporter
+$ npm install --save @ionic-native/sqlite-porter
 ```
 For free theme:
 https://market.ionicframework.com/themes/authentication
