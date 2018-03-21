@@ -84,7 +84,8 @@
     <allow-navigation href="http://192.168.1.133:8100" />
     <plugin name="cordova-plugin-x-toast" spec="^2.6.2" />
     <plugin name="cordova-sqlite-storage" spec="^2.2.1" />
-    <engine name="android" spec="7.0.0" />
     <plugin name="uk.co.workingedge.cordova.plugin.sqliteporter" spec="^1.0.2" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
+    <engine name="android" spec="7.0.0" />
+    <allow-navigation href="http://192.168.1.9:8100" />
 </widget>

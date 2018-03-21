@@ -31,14 +31,16 @@ export class CollectPage {
   selectedAreas: any = [];
   selectedDate: any = [];
 
+  toggleSearchState: boolean = false;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public dbProvider: DatabaseProvider,public platform: Platform,
+    public dbProvider: DatabaseProvider, public platform: Platform,
     public storage: Storage,
     public loadingController: LoadingController) {
 
-    this.selectedCompany = "1"//this.navParam.get('selectedCompany');
-    this.selectedAreas = "1"//this.navParam.get('selectedAreas');
-    this.selectedDate = "2018-01-10"//this.navParam.get('selectedDate');
+    this.selectedCompany = this.getFromStorage("selectedCompany");//this.navParam.get('selectedCompany');
+    this.selectedAreas = this.getFromStorage('selectedAreas');//this.navParam.get('selectedAreas');
+    this.selectedDate = "20018-01-01" ; //this.getFromStorage("selectedDate");//this.navParam.get('selectedDate');
 
     this.dbProvider.getDatabaseState().subscribe(rdy => {
       if (rdy) {
@@ -51,12 +53,24 @@ export class CollectPage {
 
     console.log('selectedAreas val', this.selectedAreas);
 
-    this.storage.set('selectedCompany', this.selectedCompany);
-    this.storage.set('selectedAreas', this.selectedAreas);
-    this.storage.set('selectedDate', this.selectedDate);
     this.storage.set('selectedFilters', {
       selectedCompany: this.selectedCompany, selectedAreas: this.selectedAreas,
       selectedDate: this.selectedDate
+    });
+  }
+
+  getFromStorage(key) {
+    console.log('from storage key ', key);
+
+    this.storage.get(key).then((resp) => {
+      if (resp !== null) {
+        console.log('Value for key is ', resp);
+            return resp;
+      }
+      else
+      {
+    console.log('Couldnt find value for ', key);
+      }
     });
   }
 
@@ -123,8 +137,46 @@ export class CollectPage {
     loading.present();
   }
 
+  public onCompanyChange(selectedValue: any) {
+    this.dbProvider.getDatabaseState().subscribe(rdy => {
+      if (rdy) {
+        this.dbProvider.getAreasForCompany(selectedValue).then(data => {
+          this.areasInCompany = data;
+        });
+      }
+    });
+  }
+
+  public setFilterValues() {
+    this.toggleSearchState = false;
+
+    this.storage.set('selectedCompany', this.selectedCompany);
+    this.storage.set('selectedAreas', this.selectedAreas);
+    this.storage.set('selectedDate', this.selectedDate);
+
+    console.log("this.selectedDate=", this.selectedDate);
+    //if (this.selectedDate && this.selectedDate != '' && this.selectedDate.indexOf('-') > 0) {
+      //var dateData = this.selectedDate.split('-');
+      this.dbProvider.getDatabaseState().subscribe(rdy => {
+        if (rdy) {
+          this.dbProvider.getSubscriberPaymentsForAreaAndMonthYear(this.selectedAreas, "01", "2018").then(
+            data => {
+              this.subscribers = this.filteredSubscribers = data;
+              console.log("searched subscribers:", data);
+            }
+          );
+        }
+      });
+    //}
+  }
+
   itemSelected(item) {
     console.log(item);
+  }
+
+  toggleSearch() {
+    console.log("toggleSearchState=" + this.toggleSearchState);
+    this.toggleSearchState = !this.toggleSearchState;
   }
 
   getItems(eventVal: any) {
